@@ -26,9 +26,9 @@ public class UserUpload implements CommandLineRunner {
         Role ROLE_ADMIN = new Role("ROLE_ADMIN");
         userService.saveRoles(ROLE_USER);
         userService.saveRoles(ROLE_ADMIN);
-        userService.saveUser(new User("German", "Kozlov", (byte)27, "admin@mail.ru", "qwerty123",
+        userService.saveUser(new User("Andrew", "Kim", (byte)24, "admin@mail.ru", "qwe123",
                 Arrays.asList(ROLE_ADMIN, ROLE_USER)));
-        userService.saveUser(new User("Alina", "Yavtukhovkaya", (byte)27, "user@mail.ru", "qwerty123",
+        userService.saveUser(new User("Veronika", "Kim", (byte)25, "user@mail.ru", "qwe123",
                 Arrays.asList(ROLE_USER)));
     }
 }

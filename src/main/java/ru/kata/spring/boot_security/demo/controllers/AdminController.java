@@ -4,6 +4,7 @@ package ru.kata.spring.boot_security.demo.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
@@ -34,34 +35,34 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String createUserForm(Model model) {
+    public ModelAndView createUserForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("allRoles", userService.listRoles());
-        return "admin/new";
+        return new ModelAndView("admin/new");
     }
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("user") User user) throws Exception {
+    public ModelAndView createUser(@ModelAttribute("user") User user) throws Exception {
         userService.saveUser(user);
-        return "redirect:/admin";
+        return new ModelAndView("redirect:/admin");
     }
 
     @DeleteMapping("/{id}/delete")
-    public String deleteUser(@PathVariable("id") Long id) {
+    public ModelAndView deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/admin";
+        return new ModelAndView("redirect:/admin");
     }
 
     @GetMapping("/{id}/edit")
-    public String editUserForm(@PathVariable("id") Long id, Model model) {
+    public ModelAndView editUserForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUser(id)); // добавил
         model.addAttribute("allRoles", userService.listRoles());
-        return "admin/edit";
+        return new ModelAndView("admin/edit");
     }
     @PatchMapping ("/{id}/edit")
-    public String editUser(@ModelAttribute("user") User user, @PathVariable("id") Long id, Model model) {
+    public ModelAndView editUser(@ModelAttribute("user") User user, @PathVariable("id") Long id, Model model) {
         model.addAttribute("allRoles", userService.listRoles());
         userService.updateUser(user);
-        return "redirect:/admin";
+        return new ModelAndView("redirect:/admin");
     }
 }
 
